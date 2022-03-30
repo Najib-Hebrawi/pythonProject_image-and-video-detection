@@ -9,6 +9,7 @@ templateImage = cv2.imread('venv/lib/images/A.png')
 templateImage = cv2.resize(templateImage, (0, 0), fx=0.4, fy=0.4)
 templateImage = cv2.cvtColor(templateImage, cv2.IMREAD_COLOR)
 
+
 height, width = templateImage.shape[:-1]
 
 methods = [cv2.TM_CCOEFF, cv2.TM_CCOEFF_NORMED, cv2.TM_SQDIFF, cv2.TM_SQDIFF_NORMED, cv2.TM_CCORR, cv2.TM_CCORR_NORMED]
