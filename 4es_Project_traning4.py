@@ -28,11 +28,11 @@ for meth in methods:
     bottom_right = (top_left[0] + w, top_left[1] + h)
     cv.rectangle(newImageSource, top_left, bottom_right, 255, 5)
 
-    plt.subplot(121), plt.imshow(result, cmap='gray')
-    plt.title('Matching Result'), plt.xticks([]), plt.yticks([])
-
-    plt.subplot(122), plt.imshow(newImageSource, cmap='gray')
-    plt.title('Detected Point'), plt.xticks([]), plt.yticks([])
+    plt.plot()
+    plt.imshow(newImageSource)
+    plt.title('Detected Point')
+    plt.xticks([])
+    plt.yticks([])
 
     plt.suptitle(meth)
     plt.show()
