@@ -7,7 +7,7 @@ load video.    0 for number of the webcam, in case that we have more than one we
 """""
 capture = cv2.VideoCapture(0)
 """""
-while method, to kill the webcam working.
+while method, to keep the webcam working.
 """""
 while True:
     ret, frame = capture.read()
