@@ -9,17 +9,16 @@ templateImage = cv2.imread('venv/lib/templats_images/hjrte.png')
 templateImage = cv2.resize(templateImage, (0, 0), fx=0.8, fy=0.8)
 templateImage = cv2.cvtColor(templateImage, cv2.IMREAD_COLOR)
 
-
 height, width = templateImage.shape[:-1]
 
-methods = [ cv2.TM_CCOEFF_NORMED, cv2.TM_SQDIFF, cv2.TM_SQDIFF_NORMED, cv2.TM_CCORR, cv2.TM_CCORR_NORMED]
+methods = [cv2.TM_CCOEFF_NORMED, cv2.TM_SQDIFF, cv2.TM_SQDIFF_NORMED, cv2.TM_CCORR, cv2.TM_CCORR_NORMED]
 
 for method in methods:
     newImageSource = imageSource.copy()
 
     result = cv2.matchTemplate(newImageSource, templateImage, cv2.TM_CCOEFF_NORMED)
     min_val, max_val, min_loc, max_loc = cv2.minMaxLoc(result)
-    if method in [ cv2.TM_CCOEFF_NORMED]:
+    if method in [cv2.TM_CCOEFF_NORMED]:
         location = min_loc
     else:
         location = max_loc
