@@ -18,7 +18,7 @@ for meth in methods:
     newImageSource = imageSource.copy()
     method = eval(meth)
     # Apply template Matching
-    result = cv.matchTemplate(newImageSource, templateImage, method)
+    result = cv.matchTemplate(newImageSource, templateImage,  method)
     min_val, max_val, min_loc, max_loc = cv.minMaxLoc(result)
     # If the method is TM_SQDIFF or TM_SQDIFF_NORMED, take minimum
     if method in [cv.TM_SQDIFF, cv.TM_SQDIFF_NORMED]:
