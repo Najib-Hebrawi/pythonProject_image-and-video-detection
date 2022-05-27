@@ -48,21 +48,3 @@ print(img[0][45:400])
 print images first row of our image, and the spicefic pixel(400)
 """""
 print(img[0][400])
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
