@@ -1,34 +1,38 @@
 import cv2 as cv
 import numpy as np
+from matplotlib import pyplot as plt
 
-imageSource = cv.imread('venv/lib/images/4es.png', cv.IMREAD_UNCHANGED)
-imageTemplate = cv.imread('venv/lib/templats_images/hjrte.png', cv.IMREAD_UNCHANGED)
+imageSource = cv.imread('venv/lib/DeckOfCards/hjerter2.JPG')
+imageSource = cv.resize(imageSource, (0, 0), fx=0.3, fy=0.3)
+imageSource = cv.cvtColor(imageSource, cv.IMREAD_COLOR)
 
-result = cv.matchTemplate(imageSource, imageTemplate, cv.TM_CCOEFF_NORMED)
+templateImage = cv.imread('venv/lib/templats_images/hjerte_templat.png')
+templateImage = cv.resize(templateImage, (0, 0), fx=0.9, fy=0.9)
+templateImage = cv.cvtColor(templateImage, cv.IMREAD_COLOR)
 
-# get the best match position
-min_val, max_val, min_loc, max_loc = cv.minMaxLoc(result)
+w, h = templateImage.shape[:-1]
+# All the 6 methods for comparison in a list
+methods = ['cv.TM_CCOEFF', 'cv.TM_CCOEFF_NORMED', 'cv.TM_CCORR',
+           'cv.TM_CCORR_NORMED', 'cv.TM_SQDIFF', 'cv.TM_SQDIFF_NORMED']
+for meth in methods:
+    newImageSource = imageSource.copy()
+    method = eval(meth)
+    # Apply template Matching
+    result = cv.matchTemplate(newImageSource, templateImage,  method)
+    min_val, max_val, min_loc, max_loc = cv.minMaxLoc(result)
+    # If the method is TM_SQDIFF or TM_SQDIFF_NORMED, take minimum
+    if method in [cv.TM_SQDIFF, cv.TM_SQDIFF_NORMED]:
+        top_left = min_loc
+    else:
+        top_left = max_loc
+    bottom_right = (top_left[0] + w, top_left[1] + h)
+    cv.rectangle(newImageSource, top_left, bottom_right, 255, 5)
 
-print('Best match top left position: %s' % str(max_loc))
-print('best match confidence: %s' % max_val)
+    plt.plot()
+    plt.imshow(newImageSource)
+    plt.title('Detected Point')
+    plt.xticks([])
+    plt.yticks([])
 
-
-threshold = 0.8
-if max_val >= threshold:
-    print('found card')
-
-    # get dimensions of the needle image
-    card_width = imageTemplate.shape[1]
-    card_height = imageTemplate.shape[0]
-
-    top_left = max_loc
-    bottom_right = (top_left[0] + card_width, top_left[1] + card_height)
-
-    cv.rectangle(imageSource, top_left, bottom_right,
-                 color=(0, 255, 0), thickness=2, lineType=cv.LINE_4)
-
-    cv.imshow('Result', imageSource)
-    cv.waitKey()
-
-else:
-    print('card not found')
+    plt.suptitle(meth)
+    plt.show()
