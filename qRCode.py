@@ -26,7 +26,7 @@ for meth in methods:
     else:
         top_left = max_loc
     bottom_right = (top_left[0] + w, top_left[1] + h)
-    cv.rectangle(newImageSource, top_left, bottom_right, 255, 5)
+    cv.rectangle(newImageSource, top_left, bottom_right, 255, 1)
 
     plt.plot()
     plt.imshow(newImageSource)
