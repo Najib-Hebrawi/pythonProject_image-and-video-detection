@@ -2,11 +2,11 @@ import cv2 as cv
 import numpy as np
 from matplotlib import pyplot as plt
 
-imageSource = cv.imread('venv/lib/images/3QRCardsTogather.png')
+imageSource = cv.imread('venv/lib/images/2.png')
 imageSource = cv.resize(imageSource, (0, 0), fx=0.3, fy=0.3)
 imageSource = cv.cvtColor(imageSource, cv.IMREAD_COLOR)
 
-templateImage = cv.imread('venv/lib/templats_images/1QRCardsAlone.png')
+templateImage = cv.imread('venv/lib/templats_images/1.png')
 templateImage = cv.resize(templateImage, (0, 0), fx=0.3, fy=0.3)
 templateImage = cv.cvtColor(templateImage, cv.IMREAD_COLOR)
 
@@ -31,6 +31,7 @@ for meth in methods:
     plt.plot()
     plt.imshow(newImageSource)
     plt.title('Detected Point')
+
     plt.xticks([])
     plt.yticks([])
 
